@@ -1,0 +1,38 @@
+{
+  "Nuxt Auth Page Template": {
+    "scope": "vue",
+    "prefix": "npage",
+    "body": [
+      "<script setup lang=\"ts\">",
+      "definePageMeta({",
+      "  layout: 'default',",
+      "  middleware: 'auth',",
+      "  title: '${1:Nama Halaman}'",
+      "})",
+      "",
+      "const toast = useAppToast()",
+      "</script>",
+      "",
+      "<template>",
+      "  <div class=\"space-y-6\">",
+      "    <!-- Header Halaman -->",
+      "    <div class=\"flex items-center justify-between\">",
+      "      <div>",
+      "        <h2 class=\"text-xl font-semibold text-gray-900 dark:text-white\">${1:Nama Halaman}</h2>",
+      "        <p class=\"text-sm text-gray-500\">${2:Deskripsi singkat tentang halaman ini.}</p>",
+      "      </div>",
+      "      <div class=\"flex items-center gap-3\">",
+      "        <!-- Tombol Aksi / Tambah Data -->",
+      "      </div>",
+      "    </div>",
+      "",
+      "    <!-- Konten Utama -->",
+      "    <div class=\"bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm\">",
+      "      $0",
+      "    </div>",
+      "  </div>",
+      "</template>"
+    ],
+    "description": "Generate a standard Nuxt page template with default layout, auth middleware, and title."
+  }
+}

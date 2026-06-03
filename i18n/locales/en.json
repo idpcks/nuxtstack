@@ -1,0 +1,21 @@
+{
+    "auth": {
+        "login": {
+            "title": "Welcome",
+            "subtitle": "Please login to continue",
+            "email": "Email",
+            "emailPlaceholder": "example{'@'}email.com",
+            "password": "Password",
+            "passwordPlaceholder": "••••••••",
+            "signIn": "Sign In",
+            "or": "or",
+            "signInWithGoogle": "Sign In with Google"
+        }
+    },
+    "dashboard": {
+        "welcome": "Welcome",
+        "welcomeBack": "Welcome back",
+        "success": "You successfully logged in to the dashboard.",
+        "youAreLoggedIn": "You are logged in successfully."
+    }
+}

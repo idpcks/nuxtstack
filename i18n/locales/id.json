@@ -1,0 +1,21 @@
+{
+    "auth": {
+        "login": {
+            "title": "Selamat datang",
+            "subtitle": "Silakan login untuk melanjutkan",
+            "email": "Email",
+            "emailPlaceholder": "contoh{'@'}email.com",
+            "password": "Password",
+            "passwordPlaceholder": "••••••••",
+            "signIn": "Masuk",
+            "or": "atau",
+            "signInWithGoogle": "Masuk dengan Google"
+        }
+    },
+    "dashboard": {
+        "welcome": "Selamat datang",
+        "welcomeBack": "Selamat datang kembali",
+        "success": "Anda berhasil login ke dashboard.",
+        "youAreLoggedIn": "Anda berhasil login."
+    }
+}
