@@ -17,5 +17,30 @@
         "welcomeBack": "Selamat datang kembali",
         "success": "Anda berhasil login ke dashboard.",
         "youAreLoggedIn": "Anda berhasil login."
+    },
+    "users" : {
+        "user" : "Pengguna",
+        "users" : "Pengguna",
+        "create user" : "Buat Pengguna",
+        "create users" : "Buat Pengguna",
+        "update user" : "Perbaharui Pengguna",
+        "update users" : "Perbaharui Pengguna",
+        "edit user": "Sunting Pengguna",
+        "edit users": "Sunting Pengguna",
+        "delete user": "Hapus Pengguna",
+        "delete users": "Hapus Pengguna",
+        "add user": "Tambah Pengguna",
+        "add users": "Tambah Pengguna"
+
+    },
+    "general" : {
+        "list": "List",
+        "create": "Buat",
+        "delete": "Hapus",
+        "manage": "Manage",
+        "page" : "Page",
+        "pages": "Pages",
+        "cancel": "Batal",
+        "save": "Simpan"
     }
 }

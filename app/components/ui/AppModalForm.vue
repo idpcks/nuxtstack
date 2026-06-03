@@ -1,0 +1,56 @@
+<script setup lang="ts">
+import AppButton from './AppButton.vue'
+
+defineProps<{
+  title: string
+  isOpen: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'update:isOpen', value: boolean): void
+  (e: 'submit'): void
+}>()
+</script>
+
+<template>
+  <UModal
+    :model-value="isOpen"
+    @update:model-value="emit('update:isOpen', $event)"
+  >
+    <UCard>
+      <template #header>
+        <h3 class="text-lg font-semibold">
+          {{ title }}
+        </h3>
+      </template>
+
+      <slot />
+
+      <template #footer>
+        <div class="flex justify-end gap-2">
+          
+          <!-- Cancel -->
+          <AppButton
+            icon="i-heroicons-x-mark"
+            color="neutral"
+            variant="outline"
+            @click="emit('update:isOpen', false)"
+          >
+            {{ $t('general.cancel') }}
+          </AppButton>
+
+          <!-- Submit -->
+          <AppButton
+            icon="i-heroicons-check"
+            color="primary"
+            loading-auto
+            @click="emit('submit')"
+          >
+            {{ $t('general.save') }}
+          </AppButton>
+
+        </div>
+      </template>
+    </UCard>
+  </UModal>
+</template>

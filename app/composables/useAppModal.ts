@@ -1,4 +1,4 @@
-import { ConfirmModal } from '#components'
+import { UiConfirmModal } from '#components'
 
 export const useAppModal = () => {
     const overlay = useOverlay()
@@ -10,7 +10,7 @@ export const useAppModal = () => {
         confirmLabel?: string,
         cancelLabel?: string
     ) => {
-        const modal = overlay.create(ConfirmModal, {
+        const modal = overlay.create(UiConfirmModal, {
             props: {
                 title,
                 description,

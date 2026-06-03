@@ -17,5 +17,29 @@
         "welcomeBack": "Welcome back",
         "success": "You successfully logged in to the dashboard.",
         "youAreLoggedIn": "You are logged in successfully."
+    },
+    "users" : {
+        "user" : "User",
+        "users" : "Users",
+        "create user" : "Create User",
+        "create users" : "Create Users",
+        "update user" : "Update User",
+        "update users" : "Update Users",
+        "edit user": "Edit User",
+        "edit users": "Edit Users",
+        "delete user": "Delete User",
+        "delete users": "Delete Users",
+        "add user": "Add User",
+        "add users": "Add Users"
+    },
+    "general" : {
+        "list": "List",
+        "create": "Create",
+        "delete": "Delete",
+        "manage": "Manage",
+        "page" : "Halaman",
+        "pages": "Halaman",
+        "cancel": "Cancel",
+        "save": "Save"
     }
 }
