@@ -13,7 +13,7 @@ useHead({
 
 <template>
   <div>
-    <UApp>
+    <UApp :toaster="{ position: 'bottom-right' }">
       <NuxtLoadingIndicator color="#3498db" :height="5" :throttle="0" />
       
       <!-- Top Right Floating Spinner -->

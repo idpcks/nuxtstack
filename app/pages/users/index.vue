@@ -1,74 +1,227 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import AppButton from '~/components/ui/AppButton.vue'
+import AppModalForm from '~/components/ui/AppModalForm.vue'
 import { useAppToast } from '~/composables/useAppToast'
+import { useModalForm } from '~/composables/useModalForm'
+import { useAppModal } from '~/composables/useAppModal'
+import type { User } from '#shared/types/user'
+import type { UserForm } from '~/types/user'
 
 definePageMeta({
   layout: 'default',
   middleware: 'auth',
   title: 'Users'
 })
-const data = ref([
+
+const isLoading = ref(false)
+const toast = useAppToast()
+const { openConfirmModal } = useAppModal()
+
+// Data awal pengguna
+const users = ref<User[]>([
   {
-    id: '4600',
-    date: '2024-03-11T15:30:00',
-    status: 'paid',
+    id: '1',
+    name: 'James Anderson',
     email: 'james.anderson@example.com',
-    amount: 594
+    role: 'Admin',
+    status: 'Active',
+    createdAt: '2026-06-01'
   },
   {
-    id: '4599',
-    date: '2024-03-11T10:10:00',
-    status: 'failed',
+    id: '2',
+    name: 'Mia White',
     email: 'mia.white@example.com',
-    amount: 276
+    role: 'Editor',
+    status: 'Active',
+    createdAt: '2026-06-02'
   },
   {
-    id: '4598',
-    date: '2024-03-11T08:50:00',
-    status: 'refunded',
+    id: '3',
+    name: 'William Brown',
     email: 'william.brown@example.com',
-    amount: 315
+    role: 'Viewer',
+    status: 'Inactive',
+    createdAt: '2026-06-03'
   },
   {
-    id: '4597',
-    date: '2024-03-10T19:45:00',
-    status: 'paid',
+    id: '4',
+    name: 'Emma Davis',
     email: 'emma.davis@example.com',
-    amount: 529
-  },
-  {
-    id: '4596',
-    date: '2024-03-10T15:55:00',
-    status: 'paid',
-    email: 'ethan.harris@example.com',
-    amount: 639
+    role: 'Admin',
+    status: 'Active',
+    createdAt: '2026-06-04'
   }
 ])
 
-const toast = useAppToast()
+const columns = [
+  { id: 'name', accessorKey: 'name', header: 'Nama' },
+  { id: 'email', accessorKey: 'email', header: 'Email' },
+  { id: 'role', accessorKey: 'role', header: 'Peran' },
+  { id: 'status', accessorKey: 'status', header: 'Status' },
+  { id: 'actions', header: 'Aksi' }
+]
 
+// Logika Modal Form
+const { isOpen, form, open, close } = useModalForm<UserForm>({
+  id: '',
+  name: '',
+  email: '',
+  role: 'Viewer',
+  status: 'Active'
+})
 
-// Simulasi loading data selama 1 detik agar NuxtLoadingIndicator terlihat
-await new Promise(resolve => setTimeout(resolve, 1000))
+const onCreate = () => {
+  open({
+    id: '',
+    name: '',
+    email: '',
+    role: 'Viewer',
+    status: 'Active'
+  })
+}
+
+const onEdit = (row: any) => {
+  open(row)
+}
+
+const onSubmit = async () => {
+  if (!form.value.name.trim() || !form.value.email.trim()) {
+    toast.showError('Nama dan Email wajib diisi!')
+    return
+  }
+
+  isLoading.value = true
+
+  // Simulasi request delay 500ms
+  await new Promise(resolve => setTimeout(resolve, 500))
+
+  if (form.value.id) {
+    // Mode Edit
+    const index = users.value.findIndex(u => u.id === form.value.id)
+    if (index !== -1) {
+      const existingUser = users.value[index]
+      if (existingUser) {
+        users.value[index] = {
+          ...existingUser,
+          name: form.value.name,
+          email: form.value.email,
+          role: form.value.role,
+          status: form.value.status
+        }
+        toast.showSuccess('Pengguna berhasil diperbarui!')
+      }
+    }
+  } else {
+    // Mode Tambah
+    const newUser = {
+      id: String(Date.now()),
+      name: form.value.name,
+      email: form.value.email,
+      role: form.value.role,
+      status: form.value.status,
+      createdAt: new Date().toISOString().slice(0, 10)
+    }
+    users.value.push(newUser)
+    toast.showSuccess('Pengguna baru berhasil ditambahkan!')
+  }
+
+  close()
+  isLoading.value = false
+}
+
+const onDelete = (row: any) => {
+  openConfirmModal(
+    'Hapus Pengguna',
+    `Apakah Anda yakin ingin menghapus pengguna "${row.name}"? Tindakan ini tidak dapat dibatalkan.`,
+    async () => {
+      isLoading.value = true
+      
+      // Simulasi request delay 500ms
+      await new Promise(resolve => setTimeout(resolve, 500))
+      
+      users.value = users.value.filter(u => u.id !== row.id)
+      toast.showSuccess('Pengguna berhasil dihapus!')
+      isLoading.value = false
+    },
+    'Hapus',
+    'Batal'
+  )
+}
 </script>
 
 <template>
   <div class="space-y-6">
     <!-- Header Halaman -->
-     <div class="flex flex justify-end mb-4 gap-3">
-         <AppButton icon="i-heroicons-plus" color="primary" loading-auto>{{ $t('users.create user') }}</AppButton>
-      </div>
-
-    <!-- Konten Utama (Tabel / Form / Informasi) -->
-    <div class="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
-      <UTable
-        loading
-        loading-color="primary"
-        loading-animation="carousel"
-        :data="data"
-        class="flex-1"
-      />
+    <div class="flex justify-end mb-4 gap-3">
+      <AppButton icon="i-heroicons-plus" color="primary" @click="onCreate">
+        {{ $t('users.create user') || 'Tambah Pengguna' }}
+      </AppButton>
     </div>
 
+    <!-- Konten Utama (Tabel / Form / Informasi) -->
+    <div class="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-xs">
+      <UTable
+        :loading="isLoading"
+        loading-color="primary"
+        loading-animation="carousel"
+        :columns="columns"
+        :data="users"
+        class="flex-1"
+      >
+        <!-- Status Cell Slot -->
+        <template #status-cell="{ row }">
+          <UBadge
+            :color="row.original.status === 'Active' ? 'success' : 'neutral'"
+            variant="subtle"
+            size="sm"
+          >
+            {{ row.original.status }}
+          </UBadge>
+        </template>
+
+        <!-- Actions Cell Slot -->
+        <template #actions-cell="{ row }">
+          <div class="flex items-center gap-2">
+            <UButton
+              icon="i-heroicons-pencil-square"
+              color="neutral"
+              variant="ghost"
+              size="sm"
+              @click="onEdit(row.original)"
+            />
+            <UButton
+              icon="i-heroicons-trash"
+              color="error"
+              variant="ghost"
+              size="sm"
+              @click="onDelete(row.original)"
+            />
+          </div>
+        </template>
+      </UTable>
+    </div>
+
+    <!-- Form Add / Edit Modal -->
+    <AppModalForm
+      v-model:isOpen="isOpen"
+      :title="form.id ? 'Edit Pengguna' : 'Tambah Pengguna'"
+      @submit="onSubmit"
+    >
+      <div class="space-y-4 py-2">
+        <UFormField label="Nama" required>
+          <UInput v-model="form.name" placeholder="Masukkan nama lengkap" class="w-full" />
+        </UFormField>
+        <UFormField label="Email" required>
+          <UInput v-model="form.email" type="email" placeholder="contoh@domain.com" class="w-full" />
+        </UFormField>
+        <UFormField label="Peran">
+          <USelect v-model="form.role" :items="['Admin', 'Editor', 'Viewer']" class="w-full" />
+        </UFormField>
+        <UFormField label="Status">
+          <USelect v-model="form.status" :items="['Active', 'Inactive']" class="w-full" />
+        </UFormField>
+      </div>
+    </AppModalForm>
   </div>
 </template>

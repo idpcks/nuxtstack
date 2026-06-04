@@ -14,43 +14,45 @@ const emit = defineEmits<{
 
 <template>
   <UModal
-    :model-value="isOpen"
-    @update:model-value="emit('update:isOpen', $event)"
+    :open="isOpen"
+    @update:open="emit('update:isOpen', $event)"
   >
-    <UCard>
-      <template #header>
-        <h3 class="text-lg font-semibold">
-          {{ title }}
-        </h3>
-      </template>
+    <template #content>
+      <UCard>
+        <template #header>
+          <h3 class="text-lg font-semibold">
+            {{ title }}
+          </h3>
+        </template>
 
-      <slot />
+        <slot />
 
-      <template #footer>
-        <div class="flex justify-end gap-2">
-          
-          <!-- Cancel -->
-          <AppButton
-            icon="i-heroicons-x-mark"
-            color="neutral"
-            variant="outline"
-            @click="emit('update:isOpen', false)"
-          >
-            {{ $t('general.cancel') }}
-          </AppButton>
+        <template #footer>
+          <div class="flex justify-end gap-2">
+            
+            <!-- Cancel -->
+            <AppButton
+              icon="i-heroicons-x-mark"
+              color="neutral"
+              variant="outline"
+              @click="emit('update:isOpen', false)"
+            >
+              {{ $t('general.cancel') }}
+            </AppButton>
 
-          <!-- Submit -->
-          <AppButton
-            icon="i-heroicons-check"
-            color="primary"
-            loading-auto
-            @click="emit('submit')"
-          >
-            {{ $t('general.save') }}
-          </AppButton>
+            <!-- Submit -->
+            <AppButton
+              icon="i-heroicons-check"
+              color="primary"
+              loading-auto
+              @click="emit('submit')"
+            >
+              {{ $t('general.save') }}
+            </AppButton>
 
-        </div>
-      </template>
-    </UCard>
+          </div>
+        </template>
+      </UCard>
+    </template>
   </UModal>
 </template>
