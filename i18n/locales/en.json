@@ -18,13 +18,13 @@
         "success": "You successfully logged in to the dashboard.",
         "youAreLoggedIn": "You are logged in successfully."
     },
-    "users" : {
-        "user" : "User",
-        "users" : "Users",
-        "create user" : "Create User",
-        "create users" : "Create Users",
-        "update user" : "Update User",
-        "update users" : "Update Users",
+    "users": {
+        "user": "User",
+        "users": "Users",
+        "create user": "Create User",
+        "create users": "Create Users",
+        "update user": "Update User",
+        "update users": "Update Users",
         "edit user": "Edit User",
         "edit users": "Edit Users",
         "delete user": "Delete User",
@@ -32,14 +32,47 @@
         "add user": "Add User",
         "add users": "Add Users"
     },
-    "general" : {
+    "menu": {
+        "dashboard": "Dashboard",
+        "users": "Users",
+        "role": "Role",
+        "roles": "Roles",
+        "permission": "Permission",
+        "permissions": "Permissions",
+        "profile": "Profile",
+        "settings": "Settings",
+        "notifications": "Notifications",
+        "preferences": "Preferences",
+        "security": "Security",
+        "help": "Help",
+        "about": "About",
+        "api": "API",
+        "language": "Language",
+        "reports": "Reports",
+        "logout": "Logout",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System",
+        "theme": "Theme",
+        "switch_to_light": "Switch to Light",
+        "switch_to_dark": "Switch to Dark",
+        "switch_to_system": "Switch to System",
+        "switch": "Switch Mode",
+        "loading": "Loading..."
+    },
+    "general": {
         "list": "List",
         "create": "Create",
         "delete": "Delete",
         "manage": "Manage",
-        "page" : "Halaman",
-        "pages": "Halaman",
+        "page": "Page",
+        "pages": "Pages",
         "cancel": "Cancel",
-        "save": "Save"
+        "save": "Save",
+        "confirm": "Confirm",
+        "yesConfirm": "Yes, Confirm",
+        "search": "Search",
+        "searchPlaceholder": "Search...",
+        "actions": "Actions"
     }
 }

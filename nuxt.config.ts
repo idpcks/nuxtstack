@@ -15,17 +15,17 @@ export default defineNuxtConfig({
     '~/assets/css/main.css'
   ],
   ui: {
-    colorMode: true
+    colorMode: true,
   },
   i18n: {
     defaultLocale: 'id',
     strategy: 'no_prefix',
-    vueI18n: './i18n/i18n.config.ts',
+    vueI18n: './i18n.config.ts',
     langDir: 'locales',
     locales: [
       { code: 'id', language: 'id-ID', file: 'id.json' },
       { code: 'en', language: 'en-US', file: 'en.json' }
     ]
-  }
+  },
 
 })

@@ -34,11 +34,11 @@ export const useNavigation = () => {
     ],
     [
       {
-        label: t('menu.appearance', 'Tampilan'),
+        label: t('menu.theme', 'Tema'),
         icon: 'i-lucide-sun-moon',
         children: [
           {
-            label: t('menu.light', 'Terang'),
+            label: t('menu.switch_to_light', 'Terang'),
             icon: 'i-lucide-sun',
             type: 'checkbox',
             checked: colorMode.value === 'light',
@@ -48,7 +48,7 @@ export const useNavigation = () => {
             onSelect(e: Event) { e.preventDefault() }
           },
           {
-            label: t('menu.dark', 'Gelap'),
+            label: t('menu.switch_to_dark', 'Gelap'),
             icon: 'i-lucide-moon',
             type: 'checkbox',
             checked: colorMode.value === 'dark',
@@ -56,7 +56,7 @@ export const useNavigation = () => {
               if (checked) colorMode.preference = 'dark'
             },
             onSelect(e: Event) { e.preventDefault() }
-          }
+          },
         ]
       }
     ],
