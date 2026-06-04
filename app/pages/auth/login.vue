@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { z } from 'zod'
+import BackgroundLines from '~/components/ui/BackgroundLines.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -55,31 +56,33 @@ const onLoginGoogle = () => {
   <div class="min-h-screen grid grid-cols-2">
 
     <!-- Kiri — Branding -->
-    <div class="bg-gray-50 dark:bg-gray-900 flex flex-col items-center justify-center p-10 gap-6 border-r border-gray-200 dark:border-gray-800">
-      <div class="flex flex-col items-center gap-3">
-        <div class="w-14 h-14 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl flex items-center justify-center">
-          <UIcon name="i-heroicons-squares-2x2" class="text-2xl" />
+    <BackgroundLines className="flex flex-col items-center justify-center p-10 gap-6 border-r border-gray-200 dark:border-gray-800 !bg-gray-50 dark:!bg-gray-900 !h-full z-0">
+      <div class="relative z-10 flex flex-col items-center gap-6">
+        <div class="flex flex-col items-center gap-3">
+          <div class="w-14 h-14 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl flex items-center justify-center shadow-xs">
+            <UIcon name="i-heroicons-squares-2x2" class="text-2xl" />
+          </div>
+          <span class="text-lg font-medium text-gray-900 dark:text-white">Admin Panel</span>
+          <p class="text-sm text-gray-500 text-center leading-relaxed">
+            Kelola semua data dan aktivitas<br>bisnis kamu dalam satu tempat.
+          </p>
         </div>
-        <span class="text-lg font-medium">Admin Panel</span>
-        <p class="text-sm text-gray-500 text-center leading-relaxed">
-          Kelola semua data dan aktivitas<br>bisnis kamu dalam satu tempat.
-        </p>
+        <div class="flex flex-col gap-3 w-full max-w-xs">
+          <div class="flex items-center gap-3 px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xs border border-gray-200 dark:border-gray-700 rounded-lg">
+            <UIcon name="i-heroicons-chart-bar" class="text-gray-400" />
+            <span class="text-sm text-gray-500">Analitik & laporan real-time</span>
+          </div>
+          <div class="flex items-center gap-3 px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xs border border-gray-200 dark:border-gray-700 rounded-lg">
+            <UIcon name="i-heroicons-users" class="text-gray-400" />
+            <span class="text-sm text-gray-500">Manajemen pengguna & roles</span>
+          </div>
+          <div class="flex items-center gap-3 px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xs border border-gray-200 dark:border-gray-700 rounded-lg">
+            <UIcon name="i-heroicons-lock-closed" class="text-gray-400" />
+            <span class="text-sm text-gray-500">Keamanan data terjamin</span>
+          </div>
+        </div>
       </div>
-      <div class="flex flex-col gap-3 w-full max-w-xs">
-        <div class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
-          <UIcon name="i-heroicons-chart-bar" class="text-gray-400" />
-          <span class="text-sm text-gray-500">Analitik & laporan real-time</span>
-        </div>
-        <div class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
-          <UIcon name="i-heroicons-users" class="text-gray-400" />
-          <span class="text-sm text-gray-500">Manajemen pengguna & roles</span>
-        </div>
-        <div class="flex items-center gap-3 px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
-          <UIcon name="i-heroicons-lock-closed" class="text-gray-400" />
-          <span class="text-sm text-gray-500">Keamanan data terjamin</span>
-        </div>
-      </div>
-    </div>
+    </BackgroundLines>
 
     <!-- Kanan — Form Login -->
     <div class="flex flex-col justify-center items-center px-10 lg:px-20">

@@ -9,13 +9,26 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     'nuxt-auth-utils',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@vueuse/motion/nuxt'
   ],
   css: [
     '~/assets/css/main.css'
   ],
   ui: {
     colorMode: true,
+  },
+  runtimeConfig: {
+    public: {
+      motion: {
+        directives: {
+          'fade-up': {
+            initial: { opacity: 0, y: 60 },
+            visible: { opacity: 1, y: 0 }
+          }
+        }
+      }
+    }
   },
   i18n: {
     defaultLocale: 'id',
