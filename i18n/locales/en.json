@@ -135,5 +135,9 @@
         "fri": "Fri",
         "sat": "Sat",
         "sun": "Sun"
+    },
+    "quotes": {
+        "hadith": "Verily, Allah loves those who do their work in the most perfect way.",
+        "hadithSource": "Hadith (HR. Al-Baihaqi)"
     }
 }

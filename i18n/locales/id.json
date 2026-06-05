@@ -135,5 +135,9 @@
         "fri": "Jum",
         "sat": "Sab",
         "sun": "Min"
+    },
+    "quotes": {
+        "hadith": "Sesungguhnya Allah mencintai seseorang yang apabila bekerja, ia menyempurnakan pekerjaannya.",
+        "hadithSource": "Hadis (HR. Al-Baihaqi)"
     }
 }

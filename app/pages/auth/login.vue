@@ -57,37 +57,39 @@ const onLoginGoogle = () => {
     </div>
 
     <!-- Kiri — Branding -->
-    <UiBackgroundLines className="flex flex-col items-center justify-center p-10 gap-6 border-r border-gray-200 dark:border-gray-800 !bg-gray-50 dark:!bg-gray-900 !h-full z-0">
-      <div class="relative z-10 flex flex-col items-center gap-6">
+    <UiBackgroundLines className="flex flex-col items-center justify-center p-10 gap-6 border-r border-gray-200 dark:border-gray-800 !bg-transparent dark:!bg-transparent !h-full z-0">
+      <div
+        v-motion
+        :initial="{ opacity: 0, scale: 0.95 }"
+        :enter="{ opacity: 1, scale: 1, transition: { duration: 800, delay: 150 } }"
+        class="relative z-10 flex flex-col items-center gap-6"
+      >
         <div class="flex flex-col items-center gap-3">
-          <div class="w-14 h-14 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl flex items-center justify-center shadow-xs">
-            <UIcon name="i-heroicons-squares-2x2" class="text-2xl" />
-          </div>
-          <span class="text-lg font-medium text-gray-900 dark:text-white">Admin Panel</span>
-          <p class="text-sm text-gray-500 text-center leading-relaxed">
-            Kelola semua data dan aktivitas<br>bisnis kamu dalam satu tempat.
-          </p>
+          <img src="~/assets/images/brand/logo.webp" alt="Brand Logo" class="h-14 w-auto drop-shadow-sm" />
+          <span class="text-lg font-medium text-gray-900 dark:text-white">DENASTECH</span>
         </div>
-        <div class="flex flex-col gap-3 w-full max-w-xs">
-          <div class="flex items-center gap-3 px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xs border border-gray-200 dark:border-gray-700 rounded-lg">
-            <UIcon name="i-heroicons-chart-bar" class="text-gray-400" />
-            <span class="text-sm text-gray-500">Analitik & laporan real-time</span>
-          </div>
-          <div class="flex items-center gap-3 px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xs border border-gray-200 dark:border-gray-700 rounded-lg">
-            <UIcon name="i-heroicons-users" class="text-gray-400" />
-            <span class="text-sm text-gray-500">Manajemen pengguna & roles</span>
-          </div>
-          <div class="flex items-center gap-3 px-4 py-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xs border border-gray-200 dark:border-gray-700 rounded-lg">
-            <UIcon name="i-heroicons-lock-closed" class="text-gray-400" />
-            <span class="text-sm text-gray-500">Keamanan data terjamin</span>
-          </div>
+        <div class="mt-8 relative w-full max-w-sm flex flex-col items-center">
+          <UIcon name="i-heroicons-chat-bubble-left-quote" class="text-5xl text-primary-500/20 mb-4" />
+          <blockquote class="text-center relative z-10">
+            <p class="text-base italic text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
+              "{{ $t('quotes.hadith') }}"
+            </p>
+            <footer class="mt-4 text-sm text-gray-500 dark:text-gray-400 font-medium">
+              — {{ $t('quotes.hadithSource') }}
+            </footer>
+          </blockquote>
         </div>
       </div>
     </UiBackgroundLines>
 
     <!-- Kanan — Form Login -->
     <div class="flex flex-col justify-center items-center px-10 lg:px-20">
-      <div class="w-full max-w-sm flex flex-col gap-5">
+      <div
+        v-motion
+        :initial="{ opacity: 0, y: 30 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 700, delay: 400, type: 'spring', stiffness: 200, damping: 25 } }"
+        class="w-full max-w-sm flex flex-col gap-5"
+      >
         <div>
           <h1 class="text-xl font-medium">{{ $t('auth.login.title') }}</h1>
           <p class="text-sm text-gray-500 mt-1">{{ $t('auth.login.subtitle') }}</p>
@@ -130,7 +132,7 @@ const onLoginGoogle = () => {
           </UFormField>
 
           <!-- Tombol Login -->
-          <UButton type="submit" block :loading="loading">
+          <UButton type="submit" block :loading="loading" trailing-icon="i-heroicons-arrow-right">
             {{ $t('auth.login.signIn') }}
           </UButton>
         </UForm>

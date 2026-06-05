@@ -21,9 +21,7 @@ const { navigation, userItems } = useNavigation()
     >
       <template #header>
         <div class="h-16 flex items-center overflow-hidden border-b border-gray-200 dark:border-gray-800" :class="[open ? 'gap-3 px-2 justify-start' : 'justify-center px-0']">
-          <div class="w-7 h-7 bg-primary-500 rounded-lg flex items-center justify-center text-white font-bold shrink-0 transition-transform">
-            A
-          </div>
+          <img src="~/assets/images/brand/logo.webp" alt="Brand Logo" class="h-7 w-auto shrink-0 transition-transform" />
           <span v-if="open" class="font-semibold text-gray-900 dark:text-white truncate">
             Admin Panel
           </span>
