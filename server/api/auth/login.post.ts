@@ -1,14 +1,10 @@
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event)
+  // Tangkap request dan validasi menggunakan skema Zod dari folder shared/
+  // Jika gagal, Nuxt otomatis merespons HTTP 400 Bad Request!
+  const body = await readValidatedBody(event, (b) => loginSchema.parse(b))
+  
+  // Karena sudah divalidasi, TypeScript 100% yakin variabel ini aman
   const { email, password } = body
-
-  // Validasi input
-  if (!email || !password) {
-    throw createError({
-      statusCode: 400,
-      message: 'Email dan password wajib diisi'
-    })
-  }
 
   // TODO: ganti dengan query ke database kamu
   // Contoh hardcode dulu untuk testing:

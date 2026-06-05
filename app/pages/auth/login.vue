@@ -6,13 +6,9 @@ definePageMeta({
   title: 'auth.login.title'
 })
 
-// Define Zod validation schema
-const schema = z.object({
-  email: z.string().min(1, 'Email wajib diisi').email('Format email tidak valid'),
-  password: z.string().min(1, 'Password wajib diisi')
-})
+// Skema validasi Zod (loginSchema) sudah otomatis di-import dari folder shared/utils!
 
-type Schema = z.infer<typeof schema>
+type Schema = z.infer<typeof loginSchema>
 
 const form = reactive<Schema>({
   email: '',
@@ -97,7 +93,7 @@ const onLoginGoogle = () => {
 
 
 
-        <UForm :schema="schema" :state="form" @submit="login" @error="console.log('Form Error:', $event)" class="flex flex-col gap-5">
+        <UForm :schema="loginSchema" :state="form" @submit="login" @error="console.log('Form Error:', $event)" class="flex flex-col gap-5">
           <!-- Email -->
           <UFormField :label="$t('auth.login.email')" name="email">
             <UInput

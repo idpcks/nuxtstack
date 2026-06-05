@@ -12,11 +12,7 @@ const items = [
 
 const active = ref('0')
 
-// --- SCHEMA & STATE: TAB AKUN ---
-const accountSchema = z.object({
-  fullName: z.string().min(2, 'Nama lengkap minimal 2 karakter'),
-  email: z.string().email('Format email tidak valid')
-})
+// accountSchema otomatis di-import dari shared/utils/validations.ts
 type AccountSchema = z.infer<typeof accountSchema>
 
 const accountForm = reactive<AccountSchema>({
@@ -30,15 +26,7 @@ const onSaveAccount = () => {
   toast.showSuccess('Profil Tersimpan', 'Perubahan data akun Anda telah berhasil diterapkan.')
 }
 
-// --- SCHEMA & STATE: TAB KEAMANAN ---
-const securitySchema = z.object({
-  oldPassword: z.string().min(1, 'Password lama wajib diisi'),
-  newPassword: z.string().min(8, 'Password baru minimal 8 karakter'),
-  confirmPassword: z.string()
-}).refine((data) => data.newPassword === data.confirmPassword, {
-  message: "Konfirmasi password tidak cocok",
-  path: ["confirmPassword"], // Pesan error akan di-highlight di field ini
-})
+// securitySchema otomatis di-import dari shared/utils/validations.ts
 type SecuritySchema = z.infer<typeof securitySchema>
 
 const securityForm = reactive<SecuritySchema>({
