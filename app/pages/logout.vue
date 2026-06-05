@@ -3,7 +3,7 @@ const { clear } = useUserSession()
 
 onMounted(async () => {
   await clear()
-  await navigateTo('/auth/login')
+  await navigateTo(AppRoutes.LOGIN)
 })
 
 await new Promise(resolve => setTimeout(resolve, 1000))

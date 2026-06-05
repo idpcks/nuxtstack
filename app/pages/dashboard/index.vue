@@ -1,7 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'default',
-  middleware: 'auth',
   title: 'menu.dashboard'
 })
 
@@ -101,7 +100,7 @@ const timeFilters = computed(() => [
 
     <!-- Statistics Grid (Baris 1) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <UiAppStatsCard
+      <DashboardStatsCard
         v-for="(item, index) in stats"
         :key="index"
         :title="item.title"
@@ -117,12 +116,12 @@ const timeFilters = computed(() => [
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- Kolom Kiri: Chart (2/3 lebar) -->
       <div class="lg:col-span-2">
-        <UiAppMockChart />
+        <DashboardMockChart />
       </div>
 
       <!-- Kolom Kanan: Aktivitas (1/3 lebar) -->
       <div class="lg:col-span-1">
-        <UiAppRecentActivity />
+        <DashboardRecentActivity />
       </div>
     </div>
   </div>

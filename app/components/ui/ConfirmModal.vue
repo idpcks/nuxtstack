@@ -23,14 +23,14 @@ const handleConfirm = async () => {
   <UModal v-model:open="isOpen" :title="title" :description="description">
     <template #footer>
       <div class="w-full flex justify-end gap-3">
-        <UiAppButton :label="cancelLabel ?? $t('general.cancel')" color="neutral" variant="ghost"
+        <UiButton :label="cancelLabel ?? $t('general.cancel')" color="neutral" variant="ghost"
           @click="isOpen = false" />
-        <UiAppButton :label="confirmLabel ?? $t('general.yesConfirm')" color="error" :loading="loading"
+        <UiButton :label="confirmLabel ?? $t('general.yesConfirm')" color="error" :loading="loading"
           @click="handleConfirm">
           <template #trailing>
             <UIcon v-if="loading" name="i-heroicons-arrow-path" class="w-4 h-4 animate-spin" />
           </template>
-        </UiAppButton>
+        </UiButton>
       </div>
     </template>
   </UModal>

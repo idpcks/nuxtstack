@@ -2,9 +2,9 @@
 const { loggedIn } = useUserSession()
 
 if (loggedIn.value) {
-  await navigateTo('/dashboard')
+  await navigateTo(AppRoutes.DASHBOARD)
 } else {
-  await navigateTo('/auth/login')
+  await navigateTo(AppRoutes.LOGIN)
 }
 </script>
 

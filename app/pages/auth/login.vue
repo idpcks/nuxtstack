@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 definePageMeta({
   layout: 'auth',
-  middleware: 'guest'
+  title: 'auth.login.title'
 })
 
 // Define Zod validation schema
@@ -34,7 +34,7 @@ const login = async () => {
     })
     await refreshSession()
     toast.showSuccess($t('auth.login.title') || 'Login Berhasil', 'Selamat datang kembali!')
-    await navigateTo('/dashboard')
+    await navigateTo(AppRoutes.DASHBOARD)
   } catch (error: any) {
     console.error(error)
     toast.showError('Gagal Masuk', error.data?.message || 'Email atau password salah')
@@ -44,7 +44,7 @@ const login = async () => {
 }
 
 const onLoginGoogle = () => {
-  navigateTo('/auth/google', { external: true })
+  navigateTo(AppRoutes.AUTH_GOOGLE, { external: true })
 }
 </script>
 
@@ -53,7 +53,7 @@ const onLoginGoogle = () => {
     
     <!-- Tombol Ganti Bahasa (Absolute) -->
     <div class="absolute top-6 right-6 lg:right-10 z-50">
-      <UiAppLanguageSwitcher />
+      <UiLanguageSwitcher />
     </div>
 
     <!-- Kiri — Branding -->

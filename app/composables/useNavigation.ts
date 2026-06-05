@@ -7,7 +7,7 @@ export const useNavigation = () => {
 
   const logout = async () => {
     await clear()
-    await navigateTo('/auth/login')
+    await navigateTo(AppRoutes.LOGIN)
   }
 
   const confirmLogout = () => {
@@ -20,15 +20,15 @@ export const useNavigation = () => {
   }
 
   const navigation = computed(() => [
-    { label: t('menu.dashboard', 'Dashboard'), icon: 'i-heroicons-squares-2x2', to: '/dashboard' },
-    { label: t('menu.users', 'Users'), icon: 'i-heroicons-users', to: '/users' },
+    { label: t('menu.dashboard', 'Dashboard'), icon: 'i-heroicons-squares-2x2', to: AppRoutes.DASHBOARD },
+    { label: t('menu.users', 'Users'), icon: 'i-heroicons-users', to: AppRoutes.USERS },
     { label: t('menu.reports', 'Reports'), icon: 'i-heroicons-chart-bar', to: '/reports' }
   ])
 
   const userItems = computed<DropdownMenuItem[][]>(() => [
     [
       { label: t('menu.profile', 'Profil'), icon: 'i-lucide-user' },
-      { label: t('menu.settings', 'Pengaturan'), icon: 'i-lucide-settings', to: '/settings' }
+      { label: t('menu.settings', 'Pengaturan'), icon: 'i-lucide-settings', to: AppRoutes.SETTINGS }
     ],
     [
       {

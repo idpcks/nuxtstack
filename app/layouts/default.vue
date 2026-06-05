@@ -129,8 +129,8 @@ const { navigation, userItems } = useNavigation()
           </h1>
         </div>
         <div class="flex items-center gap-2 sm:gap-4">
-          <UiAppLanguageSwitcher />
-          <UiAppThemeSwitcher />
+          <UiLanguageSwitcher />
+          <UiThemeSwitcher />
           <UButton icon="i-heroicons-bell" color="neutral" variant="ghost" />
         </div>
       </header>
@@ -142,7 +142,7 @@ const { navigation, userItems } = useNavigation()
       </main>
       
       <!-- Footer Global -->
-      <UiAppFooter />
+      <UiFooter />
     </div>
   </div>
 </template>
