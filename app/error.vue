@@ -24,7 +24,7 @@ const description = computed(() => is404.value
     Halaman error.vue menggantikan app.vue secara total saat crash.
     Oleh karena itu kita wajib menggunakan <UApp> agar komponen Nuxt UI seperti UButton tetap bisa dirender dengan sempurna. 
   -->
-  <UApp>
+  <UApp :toaster="{ position: 'bottom-right' }">
     <div class="h-screen w-full flex items-center justify-center bg-white dark:bg-gray-900 relative overflow-hidden">
       <!-- Latar Belakang Garis Dinamis yang elegan -->
       <UiBackgroundLines className="absolute inset-0 z-0 flex flex-col items-center justify-center p-6 !bg-transparent">

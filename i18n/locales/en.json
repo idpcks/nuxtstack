@@ -48,7 +48,18 @@
         "delete user": "Delete User",
         "delete users": "Delete Users",
         "add user": "Add User",
-        "add users": "Add Users"
+        "add users": "Add Users",
+        "name": "Name",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "deleteConfirmTitle": "Delete User",
+        "deleteConfirmDesc": "Are you sure you want to delete user '{name}'? This action cannot be undone.",
+        "userUpdated": "User successfully updated!",
+        "userAdded": "New user successfully added!",
+        "userDeleted": "User successfully deleted!",
+        "nameEmailRequired": "Name and Email are required!",
+        "enterFullName": "Enter full name"
     },
     "menu": {
         "dashboard": "Dashboard",

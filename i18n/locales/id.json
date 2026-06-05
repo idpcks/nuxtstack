@@ -48,7 +48,18 @@
         "delete user": "Hapus Pengguna",
         "delete users": "Hapus Pengguna",
         "add user": "Tambah Pengguna",
-        "add users": "Tambah Pengguna"
+        "add users": "Tambah Pengguna",
+        "name": "Nama",
+        "email": "Email",
+        "role": "Peran",
+        "status": "Status",
+        "deleteConfirmTitle": "Hapus Pengguna",
+        "deleteConfirmDesc": "Apakah Anda yakin ingin menghapus pengguna '{name}'? Tindakan ini tidak dapat dibatalkan.",
+        "userUpdated": "Pengguna berhasil diperbarui!",
+        "userAdded": "Pengguna baru berhasil ditambahkan!",
+        "userDeleted": "Pengguna berhasil dihapus!",
+        "nameEmailRequired": "Nama dan Email wajib diisi!",
+        "enterFullName": "Masukkan nama lengkap"
     },
     "menu": {
         "dashboard": "Dashboard",

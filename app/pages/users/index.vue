@@ -11,6 +11,7 @@ definePageMeta({
 const isLoading = ref(false)
 const toast = useAppToast()
 const { openConfirmModal } = useAppModal()
+const { t } = useI18n()
 
 // Data awal pengguna
 const users = ref<User[]>([
@@ -48,13 +49,13 @@ const users = ref<User[]>([
   }
 ])
 
-const columns = [
-  { id: 'name', accessorKey: 'name', header: 'Nama' },
-  { id: 'email', accessorKey: 'email', header: 'Email' },
-  { id: 'role', accessorKey: 'role', header: 'Peran' },
-  { id: 'status', accessorKey: 'status', header: 'Status' },
-  { id: 'actions', header: 'Aksi' }
-]
+const columns = computed(() => [
+  { id: 'name', accessorKey: 'name', header: t('users.name') },
+  { id: 'email', accessorKey: 'email', header: t('users.email') },
+  { id: 'role', accessorKey: 'role', header: t('users.role') },
+  { id: 'status', accessorKey: 'status', header: t('users.status') },
+  { id: 'actions', header: t('general.actions') }
+])
 
 // Logika Modal Form
 const { isOpen, form, open, close } = useModalForm<UserForm>({
@@ -81,7 +82,7 @@ const onEdit = (row: any) => {
 
 const onSubmit = async () => {
   if (!form.value.name.trim() || !form.value.email.trim()) {
-    toast.showError('Nama dan Email wajib diisi!')
+    toast.showError(t('users.nameEmailRequired'))
     return
   }
 
@@ -103,7 +104,7 @@ const onSubmit = async () => {
           role: form.value.role,
           status: form.value.status
         }
-        toast.showSuccess('Pengguna berhasil diperbarui!')
+        toast.showSuccess(t('users.userUpdated'))
       }
     }
   } else {
@@ -117,7 +118,7 @@ const onSubmit = async () => {
       createdAt: new Date().toISOString().slice(0, 10)
     }
     users.value.push(newUser)
-    toast.showSuccess('Pengguna baru berhasil ditambahkan!')
+    toast.showSuccess(t('users.userAdded'))
   }
 
   close()
@@ -126,8 +127,8 @@ const onSubmit = async () => {
 
 const onDelete = (row: any) => {
   openConfirmModal(
-    'Hapus Pengguna',
-    `Apakah Anda yakin ingin menghapus pengguna "${row.name}"? Tindakan ini tidak dapat dibatalkan.`,
+    t('users.deleteConfirmTitle'),
+    t('users.deleteConfirmDesc', { name: row.name }),
     async () => {
       isLoading.value = true
       
@@ -135,11 +136,11 @@ const onDelete = (row: any) => {
       await new Promise(resolve => setTimeout(resolve, 500))
       
       users.value = users.value.filter(u => u.id !== row.id)
-      toast.showSuccess('Pengguna berhasil dihapus!')
+      toast.showSuccess(t('users.userDeleted'))
       isLoading.value = false
     },
-    'Hapus',
-    'Batal'
+    t('general.delete'),
+    t('general.cancel')
   )
 }
 </script>
@@ -199,20 +200,20 @@ const onDelete = (row: any) => {
     <!-- Form Add / Edit Modal -->
     <UiAppModalForm
       v-model:isOpen="isOpen"
-      :title="form.id ? 'Edit Pengguna' : 'Tambah Pengguna'"
+      :title="form.id ? $t('users.edit user') : $t('users.add user')"
       @submit="onSubmit"
     >
       <div class="space-y-4 py-2">
-        <UFormField label="Nama" required>
-          <UInput v-model="form.name" placeholder="Masukkan nama lengkap" class="w-full" />
+        <UFormField :label="$t('users.name')" required>
+          <UInput v-model="form.name" :placeholder="$t('users.enterFullName')" class="w-full" />
         </UFormField>
-        <UFormField label="Email" required>
-          <UInput v-model="form.email" type="email" placeholder="contoh@domain.com" class="w-full" />
+        <UFormField :label="$t('users.email')" required>
+          <UInput v-model="form.email" type="email" :placeholder="$t('auth.login.emailPlaceholder') || 'contoh@domain.com'" class="w-full" />
         </UFormField>
-        <UFormField label="Peran">
+        <UFormField :label="$t('users.role')">
           <USelect v-model="form.role" :items="['Admin', 'Editor', 'Viewer']" class="w-full" />
         </UFormField>
-        <UFormField label="Status">
+        <UFormField :label="$t('users.status')">
           <USelect v-model="form.status" :items="['Active', 'Inactive']" class="w-full" />
         </UFormField>
       </div>

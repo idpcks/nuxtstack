@@ -130,7 +130,8 @@ const { navigation, userItems } = useNavigation()
             {{ $route.meta.title ?? 'Dashboard' }}
           </h1>
         </div>
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 sm:gap-4">
+          <UiAppLanguageSwitcher />
           <UButton icon="i-heroicons-bell" color="neutral" variant="ghost" />
         </div>
       </header>

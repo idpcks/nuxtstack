@@ -19,28 +19,25 @@ const form = reactive<Schema>({
   password: ''
 })
 
-const errors = reactive({
-  general: ''
-})
-
 const { fetch: refreshSession } = useUserSession()
+const toast = useAppToast()
 
 const showPassword = ref(false)
 const loading = ref(false)
 
 const login = async () => {
   loading.value = true
-  errors.general = ''
   try {
     await $fetch('/api/auth/login', {
       method: 'POST',
       body: form
     })
     await refreshSession()
+    toast.showSuccess($t('auth.login.title') || 'Login Berhasil', 'Selamat datang kembali!')
     await navigateTo('/dashboard')
   } catch (error: any) {
     console.error(error)
-    errors.general = error.data?.message || 'Email atau password salah'
+    toast.showError('Gagal Masuk', error.data?.message || 'Email atau password salah')
   } finally {
     loading.value = false
   }
@@ -52,7 +49,12 @@ const onLoginGoogle = () => {
 </script>
 
 <template>
-  <div class="min-h-screen grid grid-cols-2">
+  <div class="min-h-screen grid grid-cols-1 lg:grid-cols-2 relative">
+    
+    <!-- Tombol Ganti Bahasa (Absolute) -->
+    <div class="absolute top-6 right-6 lg:right-10 z-50">
+      <UiAppLanguageSwitcher />
+    </div>
 
     <!-- Kiri — Branding -->
     <UiBackgroundLines className="flex flex-col items-center justify-center p-10 gap-6 border-r border-gray-200 dark:border-gray-800 !bg-gray-50 dark:!bg-gray-900 !h-full z-0">
@@ -91,14 +93,7 @@ const onLoginGoogle = () => {
           <p class="text-sm text-gray-500 mt-1">{{ $t('auth.login.subtitle') }}</p>
         </div>
 
-        <!-- Alert Error General -->
-        <LazyUAlert
-          v-if="errors.general"
-          color="error"
-          variant="subtle"
-          icon="i-heroicons-exclamation-triangle"
-          :title="errors.general"
-        />
+
 
         <UForm :schema="schema" :state="form" @submit="login" @error="console.log('Form Error:', $event)" class="flex flex-col gap-5">
           <!-- Email -->
