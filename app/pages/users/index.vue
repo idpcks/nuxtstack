@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import AppButton from '~/components/ui/AppButton.vue'
-import AppModalForm from '~/components/ui/AppModalForm.vue'
-import { useAppToast } from '~/composables/useAppToast'
-import { useModalForm } from '~/composables/useModalForm'
-import { useAppModal } from '~/composables/useAppModal'
 import type { User } from '#shared/types/user'
 import type { UserForm } from '~/types/user'
 
@@ -154,9 +148,9 @@ const onDelete = (row: any) => {
   <div class="space-y-6">
     <!-- Header Halaman -->
     <div class="flex justify-end mb-4 gap-3">
-      <AppButton icon="i-heroicons-plus" color="primary" @click="onCreate">
+      <UiAppButton icon="i-heroicons-plus" color="primary" @click="onCreate">
         {{ $t('users.create user') || 'Tambah Pengguna' }}
-      </AppButton>
+      </UiAppButton>
     </div>
 
     <!-- Konten Utama (Tabel / Form / Informasi) -->
@@ -203,7 +197,7 @@ const onDelete = (row: any) => {
     </div>
 
     <!-- Form Add / Edit Modal -->
-    <AppModalForm
+    <UiAppModalForm
       v-model:isOpen="isOpen"
       :title="form.id ? 'Edit Pengguna' : 'Tambah Pengguna'"
       @submit="onSubmit"
@@ -222,6 +216,6 @@ const onDelete = (row: any) => {
           <USelect v-model="form.status" :items="['Active', 'Inactive']" class="w-full" />
         </UFormField>
       </div>
-    </AppModalForm>
+    </UiAppModalForm>
   </div>
 </template>

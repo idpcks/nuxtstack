@@ -16,7 +16,25 @@
         "welcome": "Selamat datang",
         "welcomeBack": "Selamat datang kembali",
         "success": "Anda berhasil login ke dashboard.",
-        "youAreLoggedIn": "Anda berhasil login."
+        "youAreLoggedIn": "Anda berhasil login.",
+        "summary": "Ringkasan Dasbor",
+        "summaryDesc": "Berikut adalah ringkasan aktivitas saat ini.",
+        "downloadReport": "Unduh Laporan",
+        "totalUsers": "Total Pengguna",
+        "totalRevenue": "Total Pendapatan",
+        "activeSessions": "Sesi Aktif",
+        "systemAlerts": "Peringatan Sistem",
+        "vsLastMonth": "vs bulan lalu",
+        "vsLastHour": "vs jam lalu",
+        "allSystemsNormal": "Semua sistem normal",
+        "stable": "Stabil",
+        "visitorStats": "Statistik Pengunjung",
+        "last7Days": "7 Hari Terakhir",
+        "recentActivity": "Aktivitas Terkini",
+        "seeAll": "Lihat Semua",
+        "today": "Hari Ini",
+        "thisMonth": "Bulan Ini",
+        "thisYear": "Tahun Ini"
     },
     "users": {
         "user": "Pengguna",
@@ -74,5 +92,21 @@
         "search": "Cari",
         "searchPlaceholder": "Cari...",
         "actions": "Aksi"
+    },
+    "footer": {
+        "allRightsReserved": "Seluruh hak cipta dilindungi.",
+        "privacyPolicy": "Kebijakan Privasi",
+        "terms": "Syarat & Ketentuan",
+        "help": "Bantuan",
+        "adminPanel": "Admin Panel"
+    },
+    "days": {
+        "mon": "Sen",
+        "tue": "Sel",
+        "wed": "Rab",
+        "thu": "Kam",
+        "fri": "Jum",
+        "sat": "Sab",
+        "sun": "Min"
     }
 }

@@ -7,7 +7,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/ui',
     '@pinia/nuxt',
-    '@nuxtjs/color-mode',
     'nuxt-auth-utils',
     '@nuxtjs/i18n',
     '@vueuse/motion/nuxt'

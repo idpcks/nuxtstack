@@ -31,24 +31,24 @@ const emit = defineEmits<{
           <div class="flex justify-end gap-2">
             
             <!-- Cancel -->
-            <AppButton
+            <UiAppButton
               icon="i-heroicons-x-mark"
               color="neutral"
               variant="outline"
               @click="emit('update:isOpen', false)"
             >
               {{ $t('general.cancel') }}
-            </AppButton>
+            </UiAppButton>
 
             <!-- Submit -->
-            <AppButton
+            <UiAppButton
               icon="i-heroicons-check"
               color="primary"
               loading-auto
               @click="emit('submit')"
             >
               {{ $t('general.save') }}
-            </AppButton>
+            </UiAppButton>
 
           </div>
         </template>

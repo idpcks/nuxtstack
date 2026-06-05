@@ -16,7 +16,25 @@
         "welcome": "Welcome",
         "welcomeBack": "Welcome back",
         "success": "You successfully logged in to the dashboard.",
-        "youAreLoggedIn": "You are logged in successfully."
+        "youAreLoggedIn": "You are logged in successfully.",
+        "summary": "Dashboard Summary",
+        "summaryDesc": "Here is the summary of current activities.",
+        "downloadReport": "Download Report",
+        "totalUsers": "Total Users",
+        "totalRevenue": "Total Revenue",
+        "activeSessions": "Active Sessions",
+        "systemAlerts": "System Alerts",
+        "vsLastMonth": "vs last month",
+        "vsLastHour": "vs last hour",
+        "allSystemsNormal": "All systems normal",
+        "stable": "Stable",
+        "visitorStats": "Visitor Statistics",
+        "last7Days": "Last 7 Days",
+        "recentActivity": "Recent Activity",
+        "seeAll": "See All",
+        "today": "Today",
+        "thisMonth": "This Month",
+        "thisYear": "This Year"
     },
     "users": {
         "user": "User",
@@ -74,5 +92,21 @@
         "search": "Search",
         "searchPlaceholder": "Search...",
         "actions": "Actions"
+    },
+    "footer": {
+        "allRightsReserved": "All rights reserved.",
+        "privacyPolicy": "Privacy Policy",
+        "terms": "Terms & Conditions",
+        "help": "Help",
+        "adminPanel": "Admin Panel"
+    },
+    "days": {
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat",
+        "sun": "Sun"
     }
 }
