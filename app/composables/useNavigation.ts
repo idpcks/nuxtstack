@@ -27,7 +27,6 @@ export const useNavigation = () => {
 
   const userItems = computed<DropdownMenuItem[][]>(() => [
     [
-      { label: t('menu.profile', 'Profil'), icon: 'i-lucide-user' },
       { label: t('menu.settings', 'Pengaturan'), icon: 'i-lucide-settings', to: AppRoutes.SETTINGS }
     ],
     [

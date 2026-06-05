@@ -20,7 +20,7 @@ const { navigation, userItems } = useNavigation()
       }"
     >
       <template #header>
-        <div class="flex items-center py-3 overflow-hidden" :class="[open ? 'gap-3 px-2 justify-start' : 'justify-center px-0']">
+        <div class="h-16 flex items-center overflow-hidden border-b border-gray-200 dark:border-gray-800" :class="[open ? 'gap-3 px-2 justify-start' : 'justify-center px-0']">
           <div class="w-7 h-7 bg-primary-500 rounded-lg flex items-center justify-center text-white font-bold shrink-0 transition-transform">
             A
           </div>
@@ -108,7 +108,7 @@ const { navigation, userItems } = useNavigation()
         <div class="flex items-center gap-4">
           <!-- Desktop Toggle -->
           <UButton
-            icon="i-lucide-panel-left"
+            :icon="open ? 'i-lucide-panel-left-close' : 'i-lucide-panel-left-open'"
             color="neutral"
             variant="ghost"
             aria-label="Toggle sidebar"
@@ -129,7 +129,9 @@ const { navigation, userItems } = useNavigation()
           </h1>
         </div>
         <div class="flex items-center gap-2 sm:gap-4">
+          <UiFullscreenToggle />
           <UiLanguageSwitcher />
+          <UiThemeColorPicker />
           <UiThemeSwitcher />
           <UButton icon="i-heroicons-bell" color="neutral" variant="ghost" />
         </div>

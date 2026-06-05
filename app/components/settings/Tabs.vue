@@ -1,18 +1,59 @@
 <script setup lang="ts">
+import { z } from 'zod'
+
 const { t } = useI18n()
+const toast = useAppToast()
+const userStore = useUserStore()
 
 const items = [
-  {
-    label: t('settings.account'),
-    icon: 'i-lucide-user'
-  },
-  {
-    label: t('settings.security'),
-    icon: 'i-lucide-lock'
-  }
+  { label: t('settings.account'), icon: 'i-lucide-user' },
+  { label: t('settings.security'), icon: 'i-lucide-lock' }
 ]
 
 const active = ref('0')
+
+// --- SCHEMA & STATE: TAB AKUN ---
+const accountSchema = z.object({
+  fullName: z.string().min(2, 'Nama lengkap minimal 2 karakter'),
+  email: z.string().email('Format email tidak valid')
+})
+type AccountSchema = z.infer<typeof accountSchema>
+
+const accountForm = reactive<AccountSchema>({
+  fullName: userStore.profile.fullName, // Mengambil data awal dari Pinia
+  email: userStore.profile.email
+})
+
+const onSaveAccount = () => {
+  // Memperbarui state global di Pinia
+  userStore.updateProfile(accountForm)
+  toast.showSuccess('Profil Tersimpan', 'Perubahan data akun Anda telah berhasil diterapkan.')
+}
+
+// --- SCHEMA & STATE: TAB KEAMANAN ---
+const securitySchema = z.object({
+  oldPassword: z.string().min(1, 'Password lama wajib diisi'),
+  newPassword: z.string().min(8, 'Password baru minimal 8 karakter'),
+  confirmPassword: z.string()
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: "Konfirmasi password tidak cocok",
+  path: ["confirmPassword"], // Pesan error akan di-highlight di field ini
+})
+type SecuritySchema = z.infer<typeof securitySchema>
+
+const securityForm = reactive<SecuritySchema>({
+  oldPassword: '',
+  newPassword: '',
+  confirmPassword: ''
+})
+
+const onSaveSecurity = () => {
+  // Simulasi sukses mengubah password
+  securityForm.oldPassword = ''
+  securityForm.newPassword = ''
+  securityForm.confirmPassword = ''
+  toast.showSuccess('Keamanan Diperbarui', 'Password Anda telah berhasil diubah.')
+}
 </script>
 
 <template>
@@ -38,13 +79,13 @@ const active = ref('0')
           <p class="text-sm text-gray-500 mt-1">{{ $t('settings.accountDesc') }}</p>
         </div>
         
-        <form @submit.prevent class="space-y-5 max-w-md">
-          <UFormField :label="$t('settings.fullName')">
-            <UInput placeholder="John Doe" class="w-full" icon="i-heroicons-user" />
+        <UForm :schema="accountSchema" :state="accountForm" @submit="onSaveAccount" class="space-y-5 max-w-md">
+          <UFormField :label="$t('settings.fullName')" name="fullName">
+            <UInput v-model="accountForm.fullName" placeholder="John Doe" class="w-full" icon="i-heroicons-user" />
           </UFormField>
           
-          <UFormField :label="$t('settings.emailAddress')">
-            <UInput type="email" placeholder="john@example.com" class="w-full" icon="i-heroicons-envelope" />
+          <UFormField :label="$t('settings.emailAddress')" name="email">
+            <UInput v-model="accountForm.email" type="email" placeholder="john@example.com" class="w-full" icon="i-heroicons-envelope" />
           </UFormField>
           
           <div class="pt-4">
@@ -52,7 +93,7 @@ const active = ref('0')
               {{ $t('settings.saveChanges') }}
             </UButton>
           </div>
-        </form>
+        </UForm>
       </div>
 
       <!-- Konten Tab 1: Keamanan -->
@@ -62,25 +103,25 @@ const active = ref('0')
           <p class="text-sm text-gray-500 mt-1">{{ $t('settings.securityDesc') }}</p>
         </div>
         
-        <form @submit.prevent class="space-y-5 max-w-md">
-          <UFormField :label="$t('settings.oldPassword')">
-            <UInput type="password" placeholder="••••••••" class="w-full" icon="i-heroicons-lock-closed" />
+        <UForm :schema="securitySchema" :state="securityForm" @submit="onSaveSecurity" class="space-y-5 max-w-md">
+          <UFormField :label="$t('settings.oldPassword')" name="oldPassword">
+            <UInput v-model="securityForm.oldPassword" type="password" placeholder="••••••••" class="w-full" icon="i-heroicons-lock-closed" />
           </UFormField>
           
-          <UFormField :label="$t('settings.newPassword')">
-            <UInput type="password" placeholder="••••••••" class="w-full" icon="i-heroicons-key" />
+          <UFormField :label="$t('settings.newPassword')" name="newPassword">
+            <UInput v-model="securityForm.newPassword" type="password" placeholder="••••••••" class="w-full" icon="i-heroicons-key" />
           </UFormField>
           
-          <UFormField :label="$t('settings.confirmPassword')">
-            <UInput type="password" placeholder="••••••••" class="w-full" icon="i-heroicons-check-circle" />
+          <UFormField :label="$t('settings.confirmPassword')" name="confirmPassword">
+            <UInput v-model="securityForm.confirmPassword" type="password" placeholder="••••••••" class="w-full" icon="i-heroicons-check-circle" />
           </UFormField>
           
           <div class="pt-4">
-            <UButton type="submit" color="error">
+            <UButton type="submit" color="primary">
               {{ $t('settings.updatePassword') }}
             </UButton>
           </div>
-        </form>
+        </UForm>
       </div>
 
     </div>
