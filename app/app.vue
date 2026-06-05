@@ -1,13 +1,14 @@
 <script setup lang="ts">
 const route = useRoute()
 const { isLoading } = useLoadingIndicator()
+const { t, locale } = useI18n()
 
 useHead({
-  htmlAttrs: { lang: 'id' },
+  htmlAttrs: { lang: () => locale.value },
   titleTemplate: (titleChunk) => {
     return titleChunk ? `${titleChunk} - Admin Panel` : 'Admin Panel'
   },
-  title: () => route.meta.title as string
+  title: () => t((route.meta.title as string) || 'menu.dashboard')
 })
 </script>
 

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const { t } = useI18n()
-
 definePageMeta({
   layout: 'default',
   middleware: 'auth',
-  title: 'Dashboard'
+  title: 'menu.dashboard'
 })
+
+const { t } = useI18n()
 
 const isLoading = ref(true)
 

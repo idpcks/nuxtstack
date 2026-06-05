@@ -89,6 +89,19 @@
         "switch": "Switch Mode",
         "loading": "Loading..."
     },
+    "settings": {
+        "account": "Account",
+        "security": "Security",
+        "fullName": "Full Name",
+        "emailAddress": "Email Address",
+        "saveChanges": "Save Changes",
+        "oldPassword": "Old Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "updatePassword": "Update Password",
+        "accountDesc": "Manage your basic profile information.",
+        "securityDesc": "Update your password to keep your account secure."
+    },
     "general": {
         "list": "List",
         "create": "Create",

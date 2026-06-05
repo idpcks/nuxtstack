@@ -12,9 +12,7 @@ const { navigation, userItems } = useNavigation()
     <!-- Desktop Sidebar -->
     <USidebar
       v-model:open="open"
-      collapsible="icon"
       class="hidden lg:flex"
-      rail
       :ui="{
         container: 'h-full border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900',
         inner: 'divide-transparent',
@@ -126,12 +124,13 @@ const { navigation, userItems } = useNavigation()
             class="lg:hidden"
             @click="isMobileOpen = true"
           />
-          <h1 class="text-sm font-medium text-gray-900 dark:text-white">
-            {{ $route.meta.title ?? 'Dashboard' }}
+          <h1 class="text-xl font-semibold text-gray-900 dark:text-white hidden sm:block">
+            {{ $route.meta.title ? $t($route.meta.title as string) : 'Dashboard' }}
           </h1>
         </div>
         <div class="flex items-center gap-2 sm:gap-4">
           <UiAppLanguageSwitcher />
+          <UiAppThemeSwitcher />
           <UButton icon="i-heroicons-bell" color="neutral" variant="ghost" />
         </div>
       </header>

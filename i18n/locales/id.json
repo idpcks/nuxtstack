@@ -89,6 +89,19 @@
         "switch": "Ganti Mode",
         "loading": "Memuat..."
     },
+    "settings": {
+        "account": "Akun",
+        "security": "Keamanan",
+        "fullName": "Nama Lengkap",
+        "emailAddress": "Alamat Email",
+        "saveChanges": "Simpan Perubahan",
+        "oldPassword": "Kata Sandi Lama",
+        "newPassword": "Kata Sandi Baru",
+        "confirmPassword": "Konfirmasi Kata Sandi",
+        "updatePassword": "Perbarui Kata Sandi",
+        "accountDesc": "Kelola informasi profil dasar Anda.",
+        "securityDesc": "Perbarui kata sandi untuk menjaga keamanan akun Anda."
+    },
     "general": {
         "list": "Daftar",
         "create": "Buat",

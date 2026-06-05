@@ -5,7 +5,7 @@ import type { UserForm } from '~/types/user'
 definePageMeta({
   layout: 'default',
   middleware: 'auth',
-  title: 'Users'
+  title: 'menu.users'
 })
 
 const isLoading = ref(false)
