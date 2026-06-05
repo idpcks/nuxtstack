@@ -14,5 +14,7 @@ export const AppRoutes = {
   // Halaman Terproteksi
   DASHBOARD: '/dashboard',
   USERS: '/users',
+  ROLES: '/roles',
+  REPORTS: '/reports',
   SETTINGS: '/settings'
 } as const;

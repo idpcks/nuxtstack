@@ -22,7 +22,8 @@ export const useNavigation = () => {
   const navigation = computed(() => [
     { label: t('menu.dashboard', 'Dashboard'), icon: 'i-heroicons-squares-2x2', to: AppRoutes.DASHBOARD },
     { label: t('menu.users', 'Users'), icon: 'i-heroicons-users', to: AppRoutes.USERS },
-    { label: t('menu.reports', 'Reports'), icon: 'i-heroicons-chart-bar', to: '/reports' }
+    { label: t('menu.roles', 'Roles'), icon: 'i-heroicons-users', to: AppRoutes.ROLES },
+    { label: t('menu.reports', 'Reports'), icon: 'i-heroicons-chart-bar', to: AppRoutes.REPORTS }
   ])
 
   const userItems = computed<DropdownMenuItem[][]>(() => [

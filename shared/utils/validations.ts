@@ -18,3 +18,9 @@ export const securitySchema = z.object({
   message: "Konfirmasi password tidak cocok",
   path: ["confirmPassword"],
 })
+
+export const roleSchema = z.object({
+  name: z.string().min(1, 'Nama peran wajib diisi!'),
+  description: z.string().optional(),
+  status: z.enum(['Active', 'Inactive'])
+})

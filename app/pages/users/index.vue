@@ -12,6 +12,15 @@ const toast = useAppToast()
 const { openConfirmModal } = useAppModal()
 const { t } = useI18n()
 
+// State untuk simulasi loading awal halaman (Skeleton)
+const pending = ref(true)
+
+onMounted(() => {
+  setTimeout(() => {
+    pending.value = false
+  }, 1000)
+})
+
 // Data awal pengguna
 const users = ref<User[]>([
   {
@@ -145,17 +154,37 @@ const onDelete = (row: any) => {
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div 
+    class="space-y-6"
+    v-motion
+    :initial="{ opacity: 0, y: 15 }"
+    :enter="{ opacity: 1, y: 0, transition: { duration: 500, delay: 100 } }"
+  >
     <!-- Header Halaman -->
     <div class="flex justify-end mb-4 gap-3">
-      <UiButton icon="i-heroicons-plus" color="primary" @click="onCreate">
+      <UiButton icon="i-heroicons-plus" color="primary" @click="onCreate" :disabled="pending">
         {{ $t('users.create user') || 'Tambah Pengguna' }}
       </UiButton>
     </div>
 
     <!-- Konten Utama (Tabel / Form / Informasi) -->
     <div class="bg-white dark:bg-gray-900 p-6 rounded-xl border border-gray-200 dark:border-gray-800 shadow-xs">
+      
+      <!-- Kondisi Loading Awal (Skeleton) -->
+      <div v-if="pending" class="space-y-4">
+        <div class="flex gap-4 border-b border-gray-100 dark:border-gray-800 pb-4">
+          <USkeleton class="h-6 w-1/4 rounded" />
+          <USkeleton class="h-6 w-1/4 rounded" />
+          <USkeleton class="h-6 w-1/4 rounded" />
+          <USkeleton class="h-6 w-1/4 rounded" />
+        </div>
+        <USkeleton class="h-10 w-full rounded-lg" />
+        <USkeleton class="h-10 w-full rounded-lg" />
+        <USkeleton class="h-10 w-3/4 rounded-lg" />
+      </div>
+
       <UTable
+        v-else
         :loading="isLoading"
         loading-color="primary"
         loading-animation="carousel"
