@@ -17,7 +17,6 @@ onMounted(async () => {
 
 <template>
   <div>
-    <UContainer>
     <div v-if="isLoading" class="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
         <!-- Skeleton Navigasi Tab (Mobile: Horizontal) -->
         <div class="w-full md:hidden shrink-0 flex gap-2 mb-2">
@@ -64,6 +63,5 @@ onMounted(async () => {
     <div v-else class="space-y-8">
         <SettingsTabs />
     </div>
-    </UContainer>
   </div>
 </template>
