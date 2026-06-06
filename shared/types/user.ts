@@ -1,8 +1,8 @@
 export interface User {
-  id: string
+  id: number
   name: string
   email: string
   role: 'Admin' | 'Editor' | 'Viewer'
-  status: 'Active' | 'Inactive'
+  status: boolean
   createdAt: string
 }

@@ -24,35 +24,35 @@ onMounted(() => {
 // Data awal pengguna
 const users = ref<User[]>([
   {
-    id: '1',
+    id: 1,
     name: 'James Anderson',
     email: 'james.anderson@example.com',
     role: 'Admin',
-    status: 'Active',
+    status: true,
     createdAt: '2026-06-01'
   },
   {
-    id: '2',
+    id: 2,
     name: 'Mia White',
     email: 'mia.white@example.com',
     role: 'Editor',
-    status: 'Active',
+    status: true,
     createdAt: '2026-06-02'
   },
   {
-    id: '3',
+    id: 3,
     name: 'William Brown',
     email: 'william.brown@example.com',
     role: 'Viewer',
-    status: 'Inactive',
+    status: false,
     createdAt: '2026-06-03'
   },
   {
-    id: '4',
+    id: 4,
     name: 'Emma Davis',
     email: 'emma.davis@example.com',
     role: 'Admin',
-    status: 'Active',
+    status: true,
     createdAt: '2026-06-04'
   }
 ])
@@ -67,20 +67,20 @@ const columns = computed(() => [
 
 // Logika Modal Form
 const { isOpen, form, open, close } = useModalForm<UserForm>({
-  id: '',
+  id: 0,
   name: '',
   email: '',
   role: 'Viewer',
-  status: 'Active'
+  status: true
 })
 
 const onCreate = () => {
   open({
-    id: '',
+    id: 0,
     name: '',
     email: '',
     role: 'Viewer',
-    status: 'Active'
+    status: true
   })
 }
 
@@ -118,7 +118,7 @@ const onSubmit = async () => {
   } else {
     // Mode Tambah
     const newUser = {
-      id: String(Date.now()),
+      id: Date.now(),
       name: form.value.name,
       email: form.value.email,
       role: form.value.role,
@@ -195,11 +195,11 @@ const onDelete = (row: any) => {
         <!-- Status Cell Slot -->
         <template #status-cell="{ row }">
           <UBadge
-            :color="row.original.status === 'Active' ? 'success' : 'neutral'"
+            :color="row.original.status ? 'success' : 'neutral'"
             variant="subtle"
             size="sm"
           >
-            {{ row.original.status }}
+            {{ row.original.status ? 'Active' : 'Inactive' }}
           </UBadge>
         </template>
 
@@ -242,7 +242,7 @@ const onDelete = (row: any) => {
           <USelect v-model="form.role" :items="['Admin', 'Editor', 'Viewer']" class="w-full" />
         </UFormField>
         <UFormField :label="$t('users.status')">
-          <USelect v-model="form.status" :items="['Active', 'Inactive']" class="w-full" />
+          <UCheckbox v-model="form.status" :label="form.status ? 'Active' : 'Inactive'" />
         </UFormField>
       </div>
     </UiModalForm>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+
 import type { Role } from '#shared/types/role'
 import { roleSchema } from '#shared/utils/validations'
 
@@ -17,9 +17,9 @@ const isLoading = ref(false)
 
 // Data awal roles (dummy)
 const roles = ref<Role[]>([
-  { id: '1', name: 'Admin', description: 'Administrator system with full access', status: 'Active' },
-  { id: '2', name: 'Editor', description: 'Can edit content but cannot change settings', status: 'Active' },
-  { id: '3', name: 'Viewer', description: 'Read-only access to the system', status: 'Inactive' }
+  { id: 1, name: 'Admin', description: 'Administrator system with full access', status: true },
+  { id: 2, name: 'Editor', description: 'Can edit content but cannot change settings', status: true },
+  { id: 3, name: 'Viewer', description: 'Read-only access to the system', status: false }
 ])
 
 const columns = computed(() => [
@@ -31,10 +31,10 @@ const columns = computed(() => [
 
 // Logika Modal Form
 const { isOpen, form, open, close } = useModalForm<Role>({
-  id: '',
+  id: 0,
   name: '',
   description: '',
-  status: 'Active'
+  status: true
 })
 
 onMounted(() => {
@@ -45,10 +45,10 @@ onMounted(() => {
 
 const onCreate = () => {
   open({
-    id: '',
+    id: 0,
     name: '',
     description: '',
-    status: 'Active'
+    status: true
   })
 }
 
@@ -77,7 +77,7 @@ const onSubmit = async () => {
   } else {
     // Mode Tambah
     roles.value.push({
-      id: String(Date.now()),
+      id: Date.now(),
       name: form.value.name,
       description: form.value.description,
       status: form.value.status
@@ -152,11 +152,11 @@ const onDelete = (row: any) => {
         <!-- Status Cell Slot -->
         <template #status-cell="{ row }">
           <UBadge
-            :color="row.original.status === 'Active' ? 'success' : 'neutral'"
+            :color="row.original.status ? 'success' : 'neutral'"
             variant="subtle"
             size="sm"
           >
-            {{ row.original.status }}
+            {{ row.original.status ? 'Active' : 'Inactive' }}
           </UBadge>
         </template>
 
@@ -196,7 +196,7 @@ const onDelete = (row: any) => {
           <UTextarea v-model="form.description" :placeholder="$t('roles.enterDescription')" class="w-full" />
         </UFormField>
         <UFormField :label="$t('roles.status')">
-          <USelect v-model="form.status" :items="['Active', 'Inactive']" class="w-full" />
+          <UCheckbox v-model="form.status" :label="form.status ? 'Active' : 'Inactive'" />
         </UFormField>
       </div>
     </UiModalForm>

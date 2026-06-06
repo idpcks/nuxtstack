@@ -1,6 +1,6 @@
 export interface Role {
-  id: string
+  id: number
   name: string
   description: string
-  status: 'Active' | 'Inactive'
+  status: boolean
 }
