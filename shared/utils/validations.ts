@@ -24,3 +24,9 @@ export const roleSchema = z.object({
   description: z.string().optional(),
   status: z.boolean()
 })
+
+export const permissionSchema = z.object({
+  name: z.string().min(1, 'Nama permission wajib diisi!'),
+  group: z.string().min(1, 'Group permission wajib diisi!'),
+  description: z.string().optional()
+})

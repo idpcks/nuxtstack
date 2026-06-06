@@ -15,6 +15,7 @@ export const AppRoutes = {
   DASHBOARD: '/dashboard',
   USERS: '/users',
   ROLES: '/roles',
+  PERMISSIONS: '/permissions',
   REPORTS: '/reports',
   SETTINGS: '/settings'
 } as const;
