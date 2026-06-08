@@ -65,7 +65,7 @@ const onLoginGoogle = () => {
           <span class="text-lg font-medium text-gray-900 dark:text-white">DENASTECH</span>
         </div>
         <div class="mt-8 relative w-full max-w-sm flex flex-col items-center">
-          <UIcon name="i-heroicons-chat-bubble-left-quote" class="text-5xl text-primary-500/20 mb-4" />
+          <UIcon name="i-heroicons-chat-bubble-left" class="text-5xl text-primary-500/20 mb-4" />
           <blockquote class="text-center relative z-10">
             <p class="text-base italic text-gray-700 dark:text-gray-300 leading-relaxed font-medium">
               "{{ $t('quotes.hadith') }}"

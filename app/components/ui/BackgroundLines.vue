@@ -5,26 +5,28 @@
       className
     ]"
   >
-    <svg
-      viewBox="0 0 1440 900"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      class="absolute inset-0 w-full h-full"
-      :style="{ opacity: svgOpacity, transition: 'opacity 1s' }"
-    >
-      <path
-        v-for="(item, idx) in animatedPaths"
-        :key="idx"
-        :d="item.d"
-        :stroke="item.color"
-        stroke-width="2.3"
-        stroke-linecap="round"
+    <ClientOnly>
+      <svg
+        viewBox="0 0 1440 900"
         fill="none"
-        :stroke-dashoffset="item.dashOffset"
-        :stroke-dasharray="item.dashArray"
-        :style="{ opacity: item.opacity }"
-      />
-    </svg>
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute inset-0 w-full h-full"
+        :style="{ opacity: svgOpacity, transition: 'opacity 1s' }"
+      >
+        <path
+          v-for="(item, idx) in animatedPaths"
+          :key="idx"
+          :d="item.d"
+          :stroke="item.color"
+          stroke-width="2.3"
+          stroke-linecap="round"
+          fill="none"
+          :stroke-dashoffset="item.dashOffset"
+          :stroke-dasharray="item.dashArray"
+          :style="{ opacity: item.opacity }"
+        />
+      </svg>
+    </ClientOnly>
 
     <slot />
   </div>
