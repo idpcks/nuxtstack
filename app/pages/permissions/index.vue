@@ -65,28 +65,38 @@ const onSubmit = async () => {
   }
 
   isLoading.value = true
-  await new Promise(resolve => setTimeout(resolve, 500))
 
-  if (form.value.id) {
-    // Mode Edit
-    const index = permissions.value.findIndex(p => p.id === form.value.id)
-    if (index !== -1) {
-      permissions.value[index] = { ...permissions.value[index], ...form.value }
-      toast.showSuccess(t('permissions.permissionUpdated'))
+  try {
+    // TODO: Ganti dengan pemanggilan API yang riil nanti
+    // const method = form.value.id ? 'PUT' : 'POST'
+    // const endpoint = form.value.id ? `/permissions/${form.value.id}` : '/permissions'
+    // await useApiClient(endpoint, { method, body: form.value })
+
+    await new Promise(resolve => setTimeout(resolve, 500))
+
+    if (form.value.id) {
+      // Mode Edit
+      const index = permissions.value.findIndex(p => p.id === form.value.id)
+      if (index !== -1) {
+        permissions.value[index] = { ...permissions.value[index], ...form.value }
+        toast.showSuccess(t('permissions.permissionUpdated'))
+      }
+    } else {
+      // Mode Tambah
+      permissions.value.push({
+        id: Date.now(),
+        name: form.value.name,
+        group: form.value.group,
+        description: form.value.description
+      })
+      toast.showSuccess(t('permissions.permissionAdded'))
     }
-  } else {
-    // Mode Tambah
-    permissions.value.push({
-      id: Date.now(),
-      name: form.value.name,
-      group: form.value.group,
-      description: form.value.description
-    })
-    toast.showSuccess(t('permissions.permissionAdded'))
+  } catch (error: any) {
+    toast.showError(error.message || 'Terjadi kesalahan pada sistem')
+  } finally {
+    close()
+    isLoading.value = false
   }
-
-  close()
-  isLoading.value = false
 }
 
 const onDelete = (row: any) => {
@@ -95,10 +105,19 @@ const onDelete = (row: any) => {
     t('permissions.deleteConfirmDesc', { name: row.name }),
     async () => {
       isLoading.value = true
-      await new Promise(resolve => setTimeout(resolve, 500))
-      permissions.value = permissions.value.filter(p => p.id !== row.id)
-      toast.showSuccess(t('permissions.permissionDeleted'))
-      isLoading.value = false
+      
+      try {
+        // TODO: Ganti dengan pemanggilan API riil
+        // await useApiClient(`/permissions/${row.id}`, { method: 'DELETE' })
+        
+        await new Promise(resolve => setTimeout(resolve, 500))
+        permissions.value = permissions.value.filter(p => p.id !== row.id)
+        toast.showSuccess(t('permissions.permissionDeleted'))
+      } catch (error: any) {
+        toast.showError(error.message || 'Gagal menghapus izin akses')
+      } finally {
+        isLoading.value = false
+      }
     },
     t('general.delete'),
     t('general.cancel')

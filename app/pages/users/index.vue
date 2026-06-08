@@ -96,41 +96,49 @@ const onSubmit = async () => {
 
   isLoading.value = true
 
-  // Simulasi request delay 500ms
-  await new Promise(resolve => setTimeout(resolve, 500))
+  try {
+    // TODO: Ganti dengan pemanggilan API yang riil nanti
+    // const method = form.value.id ? 'PUT' : 'POST'
+    // const endpoint = form.value.id ? `/users/${form.value.id}` : '/users'
+    // await useApiClient(endpoint, { method, body: form.value })
 
-  if (form.value.id) {
-    // Mode Edit
-    const index = users.value.findIndex(u => u.id === form.value.id)
-    if (index !== -1) {
-      const existingUser = users.value[index]
-      if (existingUser) {
-        users.value[index] = {
-          ...existingUser,
-          name: form.value.name,
-          email: form.value.email,
-          role: form.value.role,
-          status: form.value.status
+    await new Promise(resolve => setTimeout(resolve, 500))
+
+    if (form.value.id) {
+      // Mode Edit
+      const index = users.value.findIndex(u => u.id === form.value.id)
+      if (index !== -1) {
+        const existingUser = users.value[index]
+        if (existingUser) {
+          users.value[index] = {
+            ...existingUser,
+            name: form.value.name,
+            email: form.value.email,
+            role: form.value.role,
+            status: form.value.status
+          }
+          toast.showSuccess(t('users.userUpdated'))
         }
-        toast.showSuccess(t('users.userUpdated'))
       }
+    } else {
+      // Mode Tambah
+      const newUser = {
+        id: Date.now(),
+        name: form.value.name,
+        email: form.value.email,
+        role: form.value.role,
+        status: form.value.status,
+        createdAt: new Date().toISOString().slice(0, 10)
+      }
+      users.value.push(newUser)
+      toast.showSuccess(t('users.userAdded'))
     }
-  } else {
-    // Mode Tambah
-    const newUser = {
-      id: Date.now(),
-      name: form.value.name,
-      email: form.value.email,
-      role: form.value.role,
-      status: form.value.status,
-      createdAt: new Date().toISOString().slice(0, 10)
-    }
-    users.value.push(newUser)
-    toast.showSuccess(t('users.userAdded'))
+  } catch (error: any) {
+    toast.showError(error.message || 'Terjadi kesalahan')
+  } finally {
+    isLoading.value = false
+    close()
   }
-
-  close()
-  isLoading.value = false
 }
 
 const onDelete = (row: any) => {
@@ -140,12 +148,18 @@ const onDelete = (row: any) => {
     async () => {
       isLoading.value = true
       
-      // Simulasi request delay 500ms
-      await new Promise(resolve => setTimeout(resolve, 500))
-      
-      users.value = users.value.filter(u => u.id !== row.id)
-      toast.showSuccess(t('users.userDeleted'))
-      isLoading.value = false
+      try {
+        // TODO: Ganti dengan pemanggilan API riil
+        // await useApiClient(`/users/${row.id}`, { method: 'DELETE' })
+        
+        await new Promise(resolve => setTimeout(resolve, 500))
+        users.value = users.value.filter(u => u.id !== row.id)
+        toast.showSuccess(t('users.userDeleted'))
+      } catch (error: any) {
+        toast.showError(error.message || 'Gagal menghapus data')
+      } finally {
+        isLoading.value = false
+      }
     },
     t('general.delete'),
     t('general.cancel')

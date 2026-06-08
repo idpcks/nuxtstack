@@ -65,28 +65,38 @@ const onSubmit = async () => {
   }
 
   isLoading.value = true
-  await new Promise(resolve => setTimeout(resolve, 500))
 
-  if (form.value.id) {
-    // Mode Edit
-    const index = roles.value.findIndex(r => r.id === form.value.id)
-    if (index !== -1) {
-      roles.value[index] = { ...roles.value[index], ...form.value }
-      toast.showSuccess(t('roles.roleUpdated'))
+  try {
+    // TODO: Ganti dengan pemanggilan API yang riil nanti
+    // const method = form.value.id ? 'PUT' : 'POST'
+    // const endpoint = form.value.id ? `/roles/${form.value.id}` : '/roles'
+    // await useApiClient(endpoint, { method, body: form.value })
+
+    await new Promise(resolve => setTimeout(resolve, 500))
+
+    if (form.value.id) {
+      // Mode Edit
+      const index = roles.value.findIndex(r => r.id === form.value.id)
+      if (index !== -1) {
+        roles.value[index] = { ...roles.value[index], ...form.value }
+        toast.showSuccess(t('roles.roleUpdated'))
+      }
+    } else {
+      // Mode Tambah
+      roles.value.push({
+        id: Date.now(),
+        name: form.value.name,
+        description: form.value.description,
+        status: form.value.status
+      })
+      toast.showSuccess(t('roles.roleAdded'))
     }
-  } else {
-    // Mode Tambah
-    roles.value.push({
-      id: Date.now(),
-      name: form.value.name,
-      description: form.value.description,
-      status: form.value.status
-    })
-    toast.showSuccess(t('roles.roleAdded'))
+  } catch (error: any) {
+    toast.showError(error.message || 'Terjadi kesalahan pada sistem')
+  } finally {
+    close()
+    isLoading.value = false
   }
-
-  close()
-  isLoading.value = false
 }
 
 const onDelete = (row: any) => {
@@ -95,10 +105,19 @@ const onDelete = (row: any) => {
     t('roles.deleteConfirmDesc', { name: row.name }),
     async () => {
       isLoading.value = true
-      await new Promise(resolve => setTimeout(resolve, 500))
-      roles.value = roles.value.filter(r => r.id !== row.id)
-      toast.showSuccess(t('roles.roleDeleted'))
-      isLoading.value = false
+      
+      try {
+        // TODO: Ganti dengan pemanggilan API riil
+        // await useApiClient(`/roles/${row.id}`, { method: 'DELETE' })
+        
+        await new Promise(resolve => setTimeout(resolve, 500))
+        roles.value = roles.value.filter(r => r.id !== row.id)
+        toast.showSuccess(t('roles.roleDeleted'))
+      } catch (error: any) {
+        toast.showError(error.message || 'Gagal menghapus peran')
+      } finally {
+        isLoading.value = false
+      }
     },
     t('general.delete'),
     t('general.cancel')
