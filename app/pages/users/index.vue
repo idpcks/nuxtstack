@@ -67,7 +67,7 @@ const columns = computed(() => [
 
 // Logika Modal Form
 const { isOpen, form, open, close } = useModalForm<UserForm>({
-  id: 0,
+  id: undefined,
   name: '',
   email: '',
   role: 'Viewer',
@@ -76,7 +76,7 @@ const { isOpen, form, open, close } = useModalForm<UserForm>({
 
 const onCreate = () => {
   open({
-    id: 0,
+    id: undefined,
     name: '',
     email: '',
     role: 'Viewer',
@@ -104,7 +104,7 @@ const onSubmit = async () => {
 
     await new Promise(resolve => setTimeout(resolve, 500))
 
-    if (form.value.id) {
+    if (form.value.id !== undefined && form.value.id > 0) {
       // Mode Edit
       const index = users.value.findIndex(u => u.id === form.value.id)
       if (index !== -1) {

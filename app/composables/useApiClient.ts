@@ -2,25 +2,18 @@ import type { UseFetchOptions } from '#app'
 import { defu } from 'defu'
 
 export function useApiClient<T>(url: string | (() => string), options: UseFetchOptions<T> = {}) {
-  const { user } = useUserSession()
-  const config = useRuntimeConfig()
-
   const defaults: UseFetchOptions<T> = {
     baseURL: '/api',
     key: typeof url === 'function' ? url() : url,
-    onRequest({ options }) {
-      // Token otorisasi disisipkan secara aman oleh server-side proxy di server/api/[...path].ts
-      // Klien tidak perlu lagi (dan tidak memiliki akses) JWT token.
-    },
     onResponseError({ response }) {
       // Penanganan error secara terpusat
       const toast = useAppToast()
       const { clear } = useUserSession()
-      
+
       if (response.status === 401) {
         toast.showError('Sesi anda telah berakhir. Silakan login kembali.')
         clear().then(() => {
-          navigateTo('/login')
+          navigateTo(AppRoutes.LOGIN)
         })
       } else if (response.status === 403) {
         toast.showError('Anda tidak memiliki akses ke fitur ini.')

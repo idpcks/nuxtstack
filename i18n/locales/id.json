@@ -10,6 +10,11 @@
             "signIn": "Masuk",
             "or": "atau",
             "signInWithGoogle": "Masuk dengan Google"
+        },
+        "logout": {
+            "title": "Konfirmasi Keluar",
+            "desc": "Apakah Anda yakin ingin keluar dari aplikasi?",
+            "confirm": "Ya, Keluar"
         }
     },
     "dashboard": {

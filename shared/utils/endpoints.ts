@@ -31,5 +31,17 @@ export const BFF_ENDPOINTS = {
   },
   PROFILE: {
     UPDATE: '/api/user/profile'
-  }
+  },
+  USERS: {
+    BASE: '/api/users',
+    BY_ID: (id: string | number) => `/api/users/${id}`,
+  },
+  ROLES: {
+    BASE: '/api/roles',
+    BY_ID: (id: string | number) => `/api/roles/${id}`,
+  },
+  PERMISSIONS: {
+    BASE: '/api/permissions',
+    BY_ID: (id: string | number) => `/api/permissions/${id}`,
+  },
 } as const
