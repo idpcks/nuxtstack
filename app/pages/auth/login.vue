@@ -24,7 +24,7 @@ const loading = ref(false)
 const login = async () => {
   loading.value = true
   try {
-    await $fetch('/api/auth/login', {
+    await $fetch(BFF_ENDPOINTS.AUTH.LOGIN, {
       method: 'POST',
       body: form
     })

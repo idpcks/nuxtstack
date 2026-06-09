@@ -10,6 +10,11 @@
             "signIn": "Sign In",
             "or": "or",
             "signInWithGoogle": "Sign In with Google"
+        },
+        "logout": {
+            "title": "Confirm Logout",
+            "desc": "Are you sure you want to log out of the application?",
+            "confirm": "Yes, Logout"
         }
     },
     "dashboard": {

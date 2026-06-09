@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     // Request ke Backend (Agnostik)
     // Di sini kita menembak ke endpoint login backend, misalnya: /api/login
     // Anda bisa mengubah path endpoint jika backend menggunakan path berbeda (misal: /v1/auth/login)
-    const response = await $fetch<any>('/login', {
+    const response = await $fetch<any>(API_ENDPOINTS.AUTH.LOGIN, {
       baseURL: config.public.apiBaseUrl as string,
       method: 'POST',
       body: {
@@ -35,8 +35,10 @@ export default defineEventHandler(async (event) => {
         id: userData.id,
         name: userData.name,
         email: userData.email,
-        role: userData.role,
-        token: token
+        role: userData.role
+      },
+      secure: {
+        accessToken: token
       },
       loggedInAt: new Date()
     })

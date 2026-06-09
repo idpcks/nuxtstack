@@ -20,13 +20,24 @@ export const securitySchema = z.object({
 })
 
 export const roleSchema = z.object({
+  id: z.number().optional(),
   name: z.string().min(1, 'Nama peran wajib diisi!'),
   description: z.string().optional(),
   status: z.boolean()
 })
 
 export const permissionSchema = z.object({
+  id: z.number().optional(),
   name: z.string().min(1, 'Nama permission wajib diisi!'),
   group: z.string().min(1, 'Group permission wajib diisi!'),
   description: z.string().optional()
+})
+
+export const userSchema = z.object({
+  id: z.number().optional(),
+  name: z.string().min(2, 'Nama minimal 2 karakter'),
+  email: z.string().email('Format email tidak valid'),
+  role: z.enum(['Admin', 'Editor', 'Viewer']),
+  status: z.boolean(),
+  createdAt: z.string().optional()
 })

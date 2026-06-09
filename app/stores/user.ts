@@ -1,13 +1,28 @@
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', () => {
+  const { user } = useUserSession()
+
   // State: Data profil yang tersinkronisasi di seluruh aplikasi
   const profile = ref({
-    fullName: 'Admin Nuxt',
-    email: 'admin@nuxt.com',
-    role: 'Super Administrator',
+    id: 0,
+    fullName: '',
+    email: '',
+    role: '',
     avatar: ''
   })
+
+  // Sinkronisasi otomatis dengan sesi dari BFF
+  watch(user, (newUser) => {
+    if (newUser) {
+      profile.value.id = newUser.id || 0
+      profile.value.fullName = newUser.name || ''
+      profile.value.email = newUser.email || ''
+      profile.value.role = newUser.role || ''
+    } else {
+      profile.value = { id: 0, fullName: '', email: '', role: '', avatar: '' }
+    }
+  }, { immediate: true })
 
   // Actions: Fungsi untuk memodifikasi state
   const updateProfile = (data: { fullName: string; email: string }) => {
@@ -15,7 +30,7 @@ export const useUserStore = defineStore('user', () => {
     profile.value.email = data.email
     
     // Nanti di masa depan, kita bisa memanggil API backend di sini:
-    // await $fetch('/api/user/profile', { method: 'PUT', body: data })
+    // await $fetch(BFF_ENDPOINTS.PROFILE.UPDATE, { method: 'PUT', body: data })
   }
 
   return {

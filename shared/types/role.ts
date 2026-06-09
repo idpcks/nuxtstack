@@ -1,6 +1,4 @@
-export interface Role {
-  id: number
-  name: string
-  description: string
-  status: boolean
-}
+import { z } from 'zod'
+import { roleSchema } from '../utils/validations'
+
+export type Role = z.infer<typeof roleSchema>

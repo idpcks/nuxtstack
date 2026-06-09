@@ -2,6 +2,12 @@
 const { clear } = useUserSession()
 
 onMounted(async () => {
+  try {
+    await $fetch(BFF_ENDPOINTS.AUTH.LOGOUT, { method: 'POST' })
+  } catch (error) {
+    console.warn('Gagal menghapus token di backend, melanjutkan proses logout lokal.')
+  }
+  
   await clear()
   await navigateTo(AppRoutes.LOGIN)
 })

@@ -6,6 +6,14 @@ export const useNavigation = () => {
   const { clear } = useUserSession()
 
   const logout = async () => {
+    try {
+      // Menembak proxy /api/logout yang akan diteruskan ke Laravel
+      // Token Sanctum akan disematkan secara otomatis oleh proxy server
+      await $fetch(BFF_ENDPOINTS.AUTH.LOGOUT, { method: 'POST' })
+    } catch (error) {
+      console.warn('Gagal menghapus token di backend, melanjutkan proses logout lokal.')
+    }
+    
     await clear()
     await navigateTo(AppRoutes.LOGIN)
   }

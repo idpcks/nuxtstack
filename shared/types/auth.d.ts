@@ -4,7 +4,10 @@ declare module '#auth-utils' {
     name: string
     email: string
     role: string
-    token: string
+  }
+
+  interface SecureSessionData {
+    accessToken: string
   }
 }
 

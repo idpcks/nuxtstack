@@ -6,15 +6,11 @@ export function useApiClient<T>(url: string | (() => string), options: UseFetchO
   const config = useRuntimeConfig()
 
   const defaults: UseFetchOptions<T> = {
-    baseURL: config.public.apiBaseUrl as string,
+    baseURL: '/api',
     key: typeof url === 'function' ? url() : url,
     onRequest({ options }) {
-      // Menambahkan Authorization Bearer Token jika user memiliki session
-      if (user.value && user.value.token) {
-        const headers = new Headers(options.headers as HeadersInit)
-        headers.set('Authorization', `Bearer ${user.value.token}`)
-        options.headers = headers
-      }
+      // Token otorisasi disisipkan secara aman oleh server-side proxy di server/api/[...path].ts
+      // Klien tidak perlu lagi (dan tidak memiliki akses) JWT token.
     },
     onResponseError({ response }) {
       // Penanganan error secara terpusat
